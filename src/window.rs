@@ -10,7 +10,7 @@ pub use crate::cursor::{BadImage, Cursor, CustomCursor, CustomCursorSource, MAX_
 use crate::dpi::{PhysicalPosition, PhysicalSize, Position, Size};
 use crate::error::RequestError;
 pub use crate::icon::{BadIcon, Icon};
-use crate::monitor::{MonitorHandle, VideoModeHandle};
+use crate::monitor::{Fullscreen, MonitorHandle};
 use crate::platform_impl::{self, PlatformSpecificWindowAttributes};
 use crate::utils::AsAny;
 
@@ -55,7 +55,7 @@ impl From<u64> for WindowId {
 }
 
 /// Attributes used when creating a window.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct WindowAttributes {
     pub surface_size: Option<Size>,
     pub min_surface_size: Option<Size>,
@@ -1390,15 +1390,6 @@ impl From<ResizeDirection> for CursorIcon {
             West => CursorIcon::WResize,
         }
     }
-}
-
-/// Fullscreen modes.
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
-pub enum Fullscreen {
-    Exclusive(VideoModeHandle),
-
-    /// Providing `None` to `Borderless` will fullscreen on the current monitor.
-    Borderless(Option<MonitorHandle>),
 }
 
 /// The theme variant to use.
