@@ -128,13 +128,13 @@ changelog entry.
   device can't be uniquely identified.
 - Pointer `WindowEvent`s were overhauled. The new events can handle any type of pointer, serving as
   a single pointer input source. Now your application can handle any pointer type without having to
-  explicitly handle e.g. `Touch`!
-  
+  explicitly handle e.g. `Touch`:
   - Rename `CursorMoved` to `PointerMoved`.
   - Rename `CursorEntered` to `PointerEntered`.
   - Rename `CursorLeft` to `PointerLeft`.
   - Rename `MouseInput` to `PointerButton`.
   - Add `position` to every `PointerEvent`.
+  - `PointerMoved` is **not sent** after `PointerEntered` anymore.
   - Remove `Touch`, which is folded into the `Pointer*` events.
   - New `PointerKind` added to `PointerEntered` and `PointerLeft`, signifying which pointer type is
     the source of this event.

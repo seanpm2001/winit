@@ -447,6 +447,7 @@ impl ApplicationHandler for Application {
                 }
             },
             WindowEvent::PointerButton { button, state, .. } => {
+                info!("Pointer button {button:?} {state:?}");
                 let mods = window.modifiers;
                 if let Some(action) = state
                     .is_pressed()
@@ -457,11 +458,11 @@ impl ApplicationHandler for Application {
                 }
             },
             WindowEvent::PointerLeft { .. } => {
-                info!("Cursor left Window={window_id:?}");
+                info!("Pointer left Window={window_id:?}");
                 window.cursor_left();
             },
             WindowEvent::PointerMoved { position, .. } => {
-                info!("Moved cursor to {position:?}");
+                info!("Moved pointer to {position:?}");
                 window.cursor_moved(position);
             },
             WindowEvent::ActivationTokenDone { token: _token, .. } => {

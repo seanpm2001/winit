@@ -226,15 +226,15 @@ pub enum WindowEvent {
     /// - **iOS / Android / Web / Orbital:** Unsupported.
     Ime(Ime),
 
-    /// The cursor has moved on the window.
+    /// The pointer has moved on the window.
     PointerMoved {
         device_id: Option<DeviceId>,
 
-        /// (x,y) coords in pixels relative to the top-left corner of the window. Because the range
-        /// of this data is limited by the display area and it may have been transformed by
-        /// the OS to implement effects such as cursor acceleration, it should not be used
-        /// to implement non-cursor-like interactions such as 3D camera control. For that,
-        /// consider [`DeviceEvent::PointerMotion`].
+        /// (x,y) coordinates in pixels relative to the top-left corner of the window. Because the
+        /// range of this data is limited by the display area and it may have been
+        /// transformed by the OS to implement effects such as pointer acceleration, it
+        /// should not be used to implement non-pointer-like interactions such as 3D camera
+        /// control. For that, consider [`DeviceEvent::PointerMotion`].
         ///
         /// ## Platform-specific
         ///
@@ -248,11 +248,11 @@ pub enum WindowEvent {
         source: PointerSource,
     },
 
-    /// The cursor has entered the window.
+    /// The pointer has entered the window.
     PointerEntered {
         device_id: Option<DeviceId>,
 
-        /// The position of the cursor when it entered the window.
+        /// The position of the pointer when it entered the window.
         ///
         /// ## Platform-specific
         ///
@@ -267,11 +267,11 @@ pub enum WindowEvent {
         kind: PointerKind,
     },
 
-    /// The cursor has left the window.
+    /// The pointer has left the window.
     PointerLeft {
         device_id: Option<DeviceId>,
 
-        /// The position of the cursor when it left the window. The position reported can be
+        /// The position of the pointer when it left the window. The position reported can be
         /// outside the bounds of the window.
         ///
         /// ## Platform-specific
@@ -455,12 +455,7 @@ pub enum WindowEvent {
     RedrawRequested,
 }
 
-/// Represents the pointer type of a pointer event.
-///
-/// ## Platform-specific
-///
-/// **Wayland/X11:** Can only identify [`Touch`](Self::Touch), any other pointer is identified as
-/// [`Mouse`](Self::Mouse).
+/// Represents the kind type of a pointer event.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum PointerKind {
     Mouse,
@@ -482,7 +477,7 @@ pub enum PointerKind {
 #[derive(Clone, Debug, PartialEq)]
 pub enum PointerSource {
     Mouse,
-    /// Represents a touch event
+    /// Represents a touch event.
     ///
     /// Every time the user touches the screen, a [`WindowEvent::PointerEntered`] and a
     /// [`WindowEvent::PointerButton`] with [`ElementState::Pressed`] event with an unique
@@ -610,7 +605,7 @@ impl FingerId {
 /// Useful for interactions that diverge significantly from a conventional 2D GUI, such as 3D camera
 /// or first-person game controls. Many physical actions, such as mouse movement, can produce both
 /// device and window events. Because window events typically arise from virtual devices
-/// (corresponding to GUI cursors and keyboard focus) the device IDs may not match.
+/// (corresponding to GUI pointers and keyboard focus) the device IDs may not match.
 ///
 /// Note that these events are delivered regardless of input focus.
 #[derive(Clone, Copy, Debug, PartialEq)]
